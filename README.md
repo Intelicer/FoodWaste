@@ -4,25 +4,33 @@ This file uses Mark Down syntax. For more information see [here](https://www.mar
 
 [//]: # (TODO: Fill inn your name and student ID)
 
-STUDENT NAME = "Your name"  
-STUDENT ID = "Your ID"
+STUDENT NAME = "Mahmoud Madhun"  
+STUDENT ID = "139563"
 
 ## Project description
 
 [//]: # (TODO: Write a short description of your project/product here.)
+Foodwaste is a project that contain some classes like, foodStorage as a container of objects from class ingredient that will be used to make food recepies later.
 
 ## Project structure
 
 [//]: # (TODO: Describe the structure of your project here. How have you used packages in your structure. Where are all sourcefiles stored. Where are all JUnit-test classes stored. etc.)
+Struccture: Maven
+Source-Files: src/main/java/edu/ntnu/iir/bidata
+Test-Files: src/test
 
 ## Link to repository
 
 [//]: # (TODO: Include a link to your GitHub repository here.)
+https://github.com/NTNU-IE-IIR/mappe-idata1003-2024-foodwaste-ERR-RES0LVED
 
 ## How to run the project
 
 [//]: # (TODO: Describe how to run your project here. What is the main class? What is the main method?
 What is the input and output of the program? What is the expected behaviour of the program?)
+
+The code runs from the Main.java
+### More Coming Soon
 
 ## How to run the tests
 
@@ -32,3 +40,10 @@ What is the input and output of the program? What is the expected behaviour of t
 
 [//]: # (TODO: Include references here, if any. For example, if you have used code from the course book, include a reference to the chapter.
 Or if you have used code from a website or other source, include a link to the source.)
+
+### Refrences:
+<ul>
+    <li>https://www.baeldung.com/java-console-ascii-make-table</li>
+    <li>https://www.w3schools.com/java/java_arrays.asp</li>
+    <li>https://www.geeksforgeeks.org/</li>
+</ul>
