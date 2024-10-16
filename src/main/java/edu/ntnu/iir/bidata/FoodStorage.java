@@ -10,17 +10,19 @@
 package edu.ntnu.iir.bidata;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 
 
 public class FoodStorage{
 
+    private FoodWasteSystemPrints foodWasteSystemPrints = new FoodWasteSystemPrints();
 
-    private ArrayList<Ingredient> ingredients; //ingredients refers to the list
+    private ArrayList<Ingredient> ingredient; //ingredients refers to the list
 
     public FoodStorage(){
-        this.ingredients = new ArrayList<>(); 
+        this.ingredient = new ArrayList<>(); 
     }
 
 
@@ -32,7 +34,7 @@ public class FoodStorage{
      * @param ingredient the ingredient to be added to the storage
      */
     public void addIngredient(Ingredient ingredient){
-            this.ingredients.add(ingredient);
+            this.ingredient.add(ingredient);
     }
 
 
@@ -52,17 +54,8 @@ public class FoodStorage{
 */
     public void displayAllIngredients(){
         // //! | %-10s | %-8s | %4s |%n sizes
-        System.out.println("\n");
-        System.out.println("----------------------------------------------------");
-        System.out.printf("| %-16s  %-13s  %-15s |%n", " ","Ingredients"," ");
-        System.out.println("----------------------------------------------------");
-        System.out.printf("| %-13s | %-13s | %-16s |%n", "Name", "Amount","XXXXXXXXX");
-        System.out.println("----------------------------------------------------");
-
-
-
-        ingredients.forEach((Ingredient ingredient)-> 
-        {//lamda
+        foodWasteSystemPrints.userDisplayFoodStorage(); //Welcome Message to Application
+        ingredient.forEach((Ingredient ingredient)-> {//lamda
             System.out.printf("| %-13s | %-13s | %-16s |%n", ingredient.getIngredientName(), ingredient.getIngredientAmout()+" "+ingredient.getIngredientMeagurmentType(),"NotDoneYet");
             System.out.println("----------------------------------------------------");
         });
@@ -75,7 +68,7 @@ public class FoodStorage{
 
 
     public Ingredient getPositionInfoodStorage(int position){
-        return this.ingredients.get(position);
+        return this.ingredient.get(position);
     }
     
 }

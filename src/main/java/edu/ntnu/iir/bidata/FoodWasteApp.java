@@ -10,13 +10,14 @@ public class FoodWasteApp{
 
     // Selection loops
     boolean mainRunForever = true; //add ingredients Start
-    boolean addIngredientForever = true; //add ingredients loop
     boolean messurementDontExist = true; //messurement is a wrong value
     // validation loops
     boolean nameIsNotCorrect = true; //name is not correct
     boolean amountInvalid = true; //messurement is a wrong value
     //foodStorage
-    private FoodStorage foodStorage = new FoodStorage();
+    FoodStorage foodStorage = new FoodStorage();
+    //FoodWasteSystemPrints
+    FoodWasteSystemPrints foodWasteSystemPrints = new FoodWasteSystemPrints();
     //Create scanner
     Scanner userInput = new Scanner(System.in);  
     
@@ -36,20 +37,10 @@ public class FoodWasteApp{
         int choosenSelection;
         //! Use of main class 
         FoodWasteApp foodWasteStart = new FoodWasteApp();
-        System.out.println("Hello to your foodstorage");
-        System.out.println("Here you will get a selection menu to make it easy for you :)");
+        foodWasteSystemPrints.userReciveWelcomeToApplication(); //Welcome Message to Application
         while (mainRunForever == true) {
 
-            /*
-             * Selection Menu 
-            */
-
-            System.out.println("\nSelection Menu:");
-            System.out.println("1. Add Ingredients to food storage");
-            System.out.println("2. Display ingredients in the food storage");
-            System.out.println("3. View Recipes recipes that can be made.");
-            System.out.println("*: Type anything to exit.");
-
+            foodWasteSystemPrints.userReciveSelectionMenu(); //Selection Menu
             choosenSelection = userInput.nextInt();
             switch (choosenSelection) {
                 case 1:
@@ -97,28 +88,29 @@ public class FoodWasteApp{
         
         
         //! LOOPS boolean variables start with value true
+        boolean addIngredientForever = true; //add ingredients loop
+
+        //
         String ingredientName;
         double ingredientAmount;
         int ingredientMeasurement;
         
 
 
-        /*
-         * A Loop to keep the program running until the user want to exit from it.
-        */
+        
+        //? A Loop to keep the program running until the user want to exit from it.
+        
 
         while(addIngredientForever == true){
 
 
             //? User input has to be a valid Ingredient name
-            System.out.println("\nIngredients Name?");
+            foodWasteSystemPrints.askUserAboutIngredientName();
             ingredientName = userInput.nextLine();
             //! Name Check Loop
             while (nameIsNotCorrect == true) {
                 if ((ingredientName.isEmpty() || ingredientName.isBlank())){
-                    System.out.println("Name cant be empty or blank");
-                    System.out.println("\n");
-                    System.out.println("\nIngredients Name? ");
+                    foodWasteSystemPrints.alertNameInvalid();
                     ingredientName = userInput.nextLine();
                 }else{
                     nameIsNotCorrect = false;
@@ -128,18 +120,12 @@ public class FoodWasteApp{
 
 
             //? User input has to be a valid Ingredient Measurement Type
-            System.out.println("\nWhat does it measure? (the number to the left) ");
-            System.out.println("0. Unit/Units ");
-            System.out.println("1. Gram ");
-            System.out.println("2. Liter ");
+            foodWasteSystemPrints.askUserAboutMeasurementType();
             ingredientMeasurement = userInput.nextInt();
             //! Measurement Check Loop
             while (messurementDontExist == true) { 
                 if(ingredientMeasurement < 0 || 2 < ingredientMeasurement){ //! Types from 0-2 cause of array
-                    System.out.println("\nThere is only 3 measurements (the number to the left) ");
-                    System.out.println("0. Pieces ");
-                    System.out.println("1. Gram ");
-                    System.out.println("2. Liter ");
+                    foodWasteSystemPrints.alertMeasurmentTypeInvalid();
                     ingredientMeasurement = userInput.nextInt();
                 }else{
                     messurementDontExist = false;
@@ -150,12 +136,12 @@ public class FoodWasteApp{
 
 
             //? User input has to be a valid Ingredient Amount
-            System.out.println("\nAmount? ");
+            foodWasteSystemPrints.askUserAboutAmout();
             ingredientAmount = userInput.nextDouble();
             //! Amount Check Loop
             while (amountInvalid == true) { 
                 if(ingredientAmount <= 0){ //! Types from 0-2 cause of array
-                    System.out.println("\nThe cant be 0 or negative (Write a valid number.) ");
+                    foodWasteSystemPrints.alertAmountInvalid();
                     ingredientAmount = userInput.nextInt();
                 }else{
                     amountInvalid = false;
