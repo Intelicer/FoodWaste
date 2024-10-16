@@ -66,18 +66,28 @@ public class FoodStorage{
      * The table is enclosed within horizontal lines for better visual separation.
     */
     public void displayAllIngredients(){
+        //declare a variable to get sum price for all ingredients
+        final double[] sumOfIngredientPrices = {0.0}; // must use final because the variable are used in lambda expression.
+
         // //! | %-10s | %-8s | %4s |%n sizes
         foodWasteSystemPrints.userDisplayFoodStorage(); //Welcome Message to Application
         this.ingredientMap.forEach((ingredientName, ingredient)-> {//lamda
-            System.out.printf("| %-13s | %-13s | %-16s |%n", ingredient.getIngredientName(), ingredient.getIngredientAmout()+" "+ingredient.getIngredientMeagurmentType(),"NotDoneYet");
-            System.out.println("----------------------------------------------------");
+            System.out.printf("| %-13s | %-13s | %-13s | %-16s |%n", ingredient.getIngredientName(), ingredient.getIngredientAmout()+" "+ingredient.getIngredientMeasurmentmentType(),ingredient.getIngredientPriceWithMoneySymbol(),"none");
+            System.out.println("--------------------------------------------------------------------");
+            sumOfIngredientPrices[0] += ingredient.getIngredientPrice();
         });
+        System.out.println("Total Price: "+ sumOfIngredientPrices[0] + "$");
         
 
     }
 
 
 
-
+    
     
 }
+
+
+
+
+

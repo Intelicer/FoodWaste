@@ -49,8 +49,8 @@ public class Recipe {
 
     private String recipeName; //The name of the recipe.
     private String recipeDescription; //A brief description of the recipe.
-    private List<String> ingredientsForRecipe;// A list of ingredients required for the recipe.
-    private List<Double> ingredientAmounts;//A list of amounts corresponding to each ingredient in the recipe.
+    private List<String> recipeIngredientsToMakeTheRecipe;// A list of ingredients required for the recipe.
+    private List<Double> recipeIngredientAmounts;//A list of amounts corresponding to each ingredient in the recipe.
 
 
 
@@ -63,11 +63,27 @@ public class Recipe {
      * @param userIngredientsToMakeTheRecipe A list of ingredients required for the recipe.
      * @param ingredientAmounts A list of amounts corresponding to each ingredient in the recipe.
      */
-    public Recipe(String recipeName, String recipeDescription, ArrayList<String> userIngredientsToMakeTheRecipe, List<Double> ingredientAmounts) {
-        this.recipeName = recipeName;
-        this.recipeDescription = recipeDescription;
-        this.ingredientsForRecipe = userIngredientsToMakeTheRecipe;
-        this.ingredientAmounts = ingredientAmounts;
+    public Recipe(String recipeName, String recipeDescription, ArrayList<String> recipeIngredientsToMakeTheRecipe, List<Double> recipeIngredientAmounts) {
+        if ((recipeName.isBlank())){
+            throw new IllegalArgumentException("ERR_INGREDIENT_NAME_BE_EMPTY_OR_BLANK");
+        }
+        if ((recipeDescription.isBlank())){
+            throw new IllegalArgumentException("ERR_INGREDIENT_NAME_BE_EMPTY_OR_BLANK");
+        }
+
+        if (recipeIngredientsToMakeTheRecipe == null || recipeIngredientsToMakeTheRecipe.isEmpty()) {
+            throw new IllegalArgumentException("ERR_INGREDIENTS_LIST_BE_NULL_OR_EMPTY");
+        }
+        if (recipeIngredientAmounts == null || recipeIngredientAmounts.isEmpty()) {
+            throw new IllegalArgumentException("ERR_INGREDIENT_AMOUNTS_LIST_BE_NULL_OR_EMPTY");
+        }
+        if (recipeIngredientsToMakeTheRecipe.size() != recipeIngredientAmounts.size()) {
+            throw new IllegalArgumentException("ERR_INGREDIENTS_AND_AMOUNTS_SIZE_MISMATCH");
+        }
+        this.recipeName = recipeName.substring(0,1).toUpperCase() + recipeName.substring(1, recipeName.length()).toLowerCase();
+        this.recipeDescription = recipeDescription.substring(0,1).toUpperCase() + recipeDescription.substring(1, recipeDescription.length()).toLowerCase();
+        this.recipeIngredientsToMakeTheRecipe = recipeIngredientsToMakeTheRecipe;
+        this.recipeIngredientAmounts = recipeIngredientAmounts;
     }
 
     /**
@@ -94,7 +110,7 @@ public class Recipe {
      * @return A list of ingredients required for the recipe.
      */
     public List<String> getRecipeIngredients() {
-        return this.ingredientsForRecipe;
+        return this.recipeIngredientsToMakeTheRecipe;
     }
 
     /**
@@ -103,6 +119,6 @@ public class Recipe {
      * @return A list of amounts corresponding to each ingredient in the recipe.
      */
     public List<Double> getRecipeIngredientsAmount() {
-        return this.ingredientAmounts;
+        return this.recipeIngredientAmounts;
     }
 }

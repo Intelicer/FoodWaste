@@ -1,7 +1,6 @@
 package edu.ntnu.iir.bidata;
 
-import java.util.Date;
-import java.time.format.DateTimeFormatter;
+
 
 /**
  * The {@code Ingredient} class represents an ingredient with a name, amount, and measurement type.
@@ -14,7 +13,7 @@ import java.time.format.DateTimeFormatter;
  * Ingredient ingredient = new Ingredient("Sugar", 500, 1);
  * System.out.println(ingredient.getIngredientName()); // Output: Sugar
  * System.out.println(ingredient.getIngredientAmout()); // Output: 500.0
- * System.out.println(ingredient.getIngredientMeagurmentType()); // Output: G
+ * System.out.println(ingredient.getIngredientMeasurmentmentType()); // Output: G
  * ingredient.addExtraIngredientAmount(200);
  * ingredient.useIngredientAmount(100);
  * }</pre>
@@ -30,7 +29,6 @@ public class Ingredient{
     // private String dateExpieres;
     private String[] ingredientMeasurementType = {"Unit","G","L"};
     private String typeOfMeaguer;
-    private Date ingreadientExpireDate = new Date();
     private double ingreadientPrice;
 
 
@@ -50,17 +48,23 @@ public class Ingredient{
      * 
     */
     public Ingredient(String ingredientName, double ingredientAmount, int ingredientMeasurement, double ingreadientPrice){
+
         //? Guard Statement for ingredientName
         if ((ingredientName.isBlank())){
             throw new IllegalArgumentException("ERR_INGREDIENT_NAME_BE_EMPTY_OR_BLANK");
         }
-        // ? Guard Statement for the ingredientMeasurement
+        // ? Guard Statement for the Measurement
         if(ingredientMeasurement >= 1 && ingredientMeasurement > 2){ //! Types from 0-2
             throw new IllegalArgumentException("ERR_THERE_IS_ONLY_3_MEAGUERMENTS");
         }
-        //? Guard Statement for the amount
+        //? Guard Statement for the Amount
         if (ingredientAmount <= 0){
             throw new IllegalArgumentException("ERR_INGREDIENT_AMOUNT_CANT_BE_0_OR_NEGATIVE");
+        }
+
+        // //? Guard Statement for the Price
+        if (ingreadientPrice < 0){
+            throw new IllegalArgumentException("ERR_INGREDIENT_PRICE_CANT_BE_0_OR_NEGATIVE");
         }
 
         this.ingredientName = ingredientName.substring(0,1).toUpperCase() + ingredientName.substring(1, ingredientName.length()).toLowerCase();
@@ -88,20 +92,35 @@ public class Ingredient{
     public double getIngredientAmout(){ 
         return this.ingredientAmount;
     }
-
-
-
+    
+    
+    
     /**
      * Return Measuremnt type of an Ingredient based on user choose from the selection menu,
      * here is a small ArrayList use called ingredientMeasurement.
      * @return
      */
-
-    public String getIngredientMeagurmentType(){ 
+    
+    public String getIngredientMeasurmentmentType(){ 
         typeOfMeaguer = ingredientMeasurementType[this.ingredientMeasurement];
         return typeOfMeaguer;
     }
     
+
+    /**
+     * Return Ingredient Price.
+    */
+    public double getIngredientPrice(){ 
+        return this.ingreadientPrice;
+    }
+
+    /**
+     * Return Ingredient Price.
+    */
+    public String getIngredientPriceWithMoneySymbol(){ 
+        String ingreadientPriceInDollars = this.ingreadientPrice + "$";
+        return ingreadientPriceInDollars;
+    }
 
 
 

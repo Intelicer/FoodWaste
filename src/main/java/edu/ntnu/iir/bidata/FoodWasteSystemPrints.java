@@ -64,15 +64,17 @@ public class FoodWasteSystemPrints {
 
     public void userDisplayFoodStorage(){
         System.out.println("\n");
-        System.out.println("----------------------------------------------------");
-        System.out.printf("| %-16s  %-13s  %-15s |%n", " ","Ingredients"," ");
-        System.out.println("----------------------------------------------------");
-        System.out.printf("| %-13s | %-13s | %-16s |%n", "Name", "Amount","Expires");
-        System.out.println("----------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------");
+        System.out.printf("| %-23s  %-13s  %-24s |%n", " ","Ingredients"," ");
+        System.out.println("--------------------------------------------------------------------");
+        System.out.printf("| %-13s | %-13s | %-13s | %-16s |%n", "Name", "Amount","Price","Expires");
+        System.out.println("--------------------------------------------------------------------");
     }
 
     public void userDisplayRecipeBook(){
-
+        System.out.println("--------------------------------------------------------------------");
+        System.out.printf("| %-23s  %-13s  %-24s |%n", " ","RecipeBook"," ");
+        System.out.println("--------------------------------------------------------------------");
     }
 
 
@@ -85,7 +87,16 @@ public class FoodWasteSystemPrints {
     public void askUserAboutIngredientName(){
         System.out.println("\nIngredients Name?");
     }
-    public void askUserAboutMeasurementType(){
+
+        
+    public void askUserAbouIngredientAmout(){
+        System.out.println("\nIngredients Amount? ");
+    }
+    public void askUserAboutIngredientPrice(){
+        System.out.println("\nIngredients Price?");
+    }
+
+    public void askUserAboutIngredientMeasurementType(){
         System.out.println("\nWhat does it measure? (the number to the left) ");
         System.out.println("0. Unit/Units ");
         System.out.println("1. Gram ");
@@ -93,10 +104,6 @@ public class FoodWasteSystemPrints {
     }
     
     
-    
-    public void askUserAboutAmout(){
-        System.out.println("\nAmount? ");
-    }
 
 
 
@@ -107,23 +114,25 @@ public class FoodWasteSystemPrints {
      */
     public void alertNameInvalid(){
         System.out.println("\nName cant be empty or blank");
-        System.out.println("\nIngredients Name? ");
+        System.out.println("Rewrite a name for the Ingreadient: ");
     }
 
     public void alertMeasurmentTypeInvalid(){
-        System.out.println("\nName cant be empty or blank");
-        System.out.println("\nIngredients Name? ");
+        System.out.println("\nThere is only 3 measurment types:");
+        System.out.println("0. Unit/Units ");
+        System.out.println("1. Gram ");
+        System.out.println("2. Liter "); 
+        System.out.println("Choose one of the shown measurments: ");
     }
 
     public void alertAmountInvalid(){
-        System.out.println("\nName cant be empty or blank");
-        System.out.println("\nIngredients Name? ");
+        System.out.println("\nAmount Cant be Negative or 0");
+        System.out.println("Check the Amount again: ");
+    }
+
+    public void alertPriceInvalid(){
+        System.out.println("\nPrice Cant be Negative or 0");
+        System.out.println("Check the price again:");
     }
 
 }
-
-
-
-
-
-// foodWasteSystemPrints.userReciveWelcomeToApplication(); //Welcome Message to Application

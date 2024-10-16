@@ -20,13 +20,21 @@
 package edu.ntnu.iir.bidata;
 
 import java.util.HashMap;
+import java.util.Iterator;
+
 
 public class RecipeBook {
     private HashMap<String, Recipe> recipeBookMap; // Creating HashMap for Ingredients
+    private FoodWasteSystemPrints foodWasteSystemPrints = new FoodWasteSystemPrints();
+
 
     public RecipeBook() {
         this.recipeBookMap = new HashMap<>();
     }
+
+
+
+
 
     /**
      * Adds a recipe to the recipe book.
@@ -38,18 +46,35 @@ public class RecipeBook {
         this.recipeBookMap.put(recipeName, recipe);    
     }
 
+
+
+
+
+
+    
     /**
      * Displays all recipes in the recipe book.
-     * This method iterates through the recipeBookMap and prints out the details of each recipe.
-     * For each recipe, it prints the recipe name, description, ingredients, and ingredient amounts.
+     * 
+     * This method iterates through the recipeBookMap and prints out the details
+     * of each recipe, including the recipe name, description, and ingredients with their amounts.
+     * 
+     * The ingredients and their amounts are printed in the order they are stored in the recipe.
      */
     public void displayAllRecipes() {
         this.recipeBookMap.forEach((recipeName, recipe) -> { // lambda
             System.out.println("\n");
-            System.out.println(recipe.getRecipeName());
-            System.out.println(recipe.getRecipeDescription());
-            System.out.println(recipe.getRecipeIngredients());
-            System.out.println(recipe.getRecipeIngredientsAmount());
+
+
+            foodWasteSystemPrints.userDisplayRecipeBook();
+            System.out.println("Description: "+recipe.getRecipeDescription());
+           
+            Iterator<String> ingredientsNameIterator = recipe.getRecipeIngredients().iterator();
+            Iterator<Double> ingredientsAmountIterator = recipe.getRecipeIngredientsAmount().iterator();
+
+            System.out.println("Ingreadients:");
+            while (ingredientsNameIterator.hasNext()) {
+                System.out.println(ingredientsNameIterator.next() +" : " +ingredientsAmountIterator.next());
+            }
         });
     }
 }
