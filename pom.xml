@@ -5,9 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>edu.ntnu.iir.bidata</groupId>
-    <!-- TODO: Change the artifact ID to fit with your project -->
     <artifactId>FoodWaste</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
 
     <properties>
         <!-- Per Sept 2024 the LTS version is 21 -->

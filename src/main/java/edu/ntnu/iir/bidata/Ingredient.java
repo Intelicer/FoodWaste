@@ -1,28 +1,37 @@
-
-/*
- ^ Represents a Ingredient by type, name, amount, date of placed in the storage, and date of expier. 
- ^
- ^ @author: (Mahmoud Madhun)
- ^ @javaBuild: (JavaSE build 23+37-2369)
-*/
-
-
 package edu.ntnu.iir.bidata;
 
 import java.util.Date;
-import java.lang.Number;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 
+/**
+ * The {@code Ingredient} class represents an ingredient with a name, amount, and measurement type.
+ * It provides methods to retrieve ingredient details, add extra amounts, and use specified amounts.
+ * 
+ * <p>If invalid values are passed to the parameters, an {@link IllegalArgumentException} will be thrown.</p>
+ * 
+ * <p>Example usage:</p>
+ * <pre>{@code
+ * Ingredient ingredient = new Ingredient("Sugar", 500, 1);
+ * System.out.println(ingredient.getIngredientName()); // Output: Sugar
+ * System.out.println(ingredient.getIngredientAmout()); // Output: 500.0
+ * System.out.println(ingredient.getIngredientMeagurmentType()); // Output: G
+ * ingredient.addExtraIngredientAmount(200);
+ * ingredient.useIngredientAmount(100);
+ * }</pre>
+ * 
+ * @author Mahmoud Madhun)
+ * @version (JavaSE build 23+37-2369)
+ */
 public class Ingredient{
 
     private int ingredientMeasurement;
     private String ingredientName;
     private double ingredientAmount;
-    // private String datePlaced;
     // private String dateExpieres;
     private String[] ingredientMeasurementType = {"Unit","G","L"};
     private String typeOfMeaguer;
+    private Date ingreadientExpireDate = new Date();
+    private double ingreadientPrice;
 
 
 
@@ -35,14 +44,14 @@ public class Ingredient{
      * @param ingredientName name of it (String)
      * @param ingredientAmount amount of it (will be taken after an if statement that the user will choose if its in: gram,liter or piece) => (int)
      * @param ingredientType type of it (int)
-     * @param dateExpieres Amount of Ingredient
+     * @param ingreadientExpireDate Ingreadient expire
      * 
      * @throws IllegalArgumentException if ingredientMeasurement, ingredientName or ingredientAmount are given with invalid values.
      * 
     */
-    public Ingredient(String ingredientName, double ingredientAmount, int ingredientMeasurement){
+    public Ingredient(String ingredientName, double ingredientAmount, int ingredientMeasurement, double ingreadientPrice){
         //? Guard Statement for ingredientName
-        if ((ingredientName.isBlank() || ingredientName.isEmpty())){
+        if ((ingredientName.isBlank())){
             throw new IllegalArgumentException("ERR_INGREDIENT_NAME_BE_EMPTY_OR_BLANK");
         }
         // ? Guard Statement for the ingredientMeasurement
@@ -53,10 +62,12 @@ public class Ingredient{
         if (ingredientAmount <= 0){
             throw new IllegalArgumentException("ERR_INGREDIENT_AMOUNT_CANT_BE_0_OR_NEGATIVE");
         }
+
         this.ingredientName = ingredientName.substring(0,1).toUpperCase() + ingredientName.substring(1, ingredientName.length()).toLowerCase();
         this.ingredientMeasurement = ingredientMeasurement;
         this.ingredientAmount = ingredientAmount;
         // this.dateExpieres = dateExpieres;
+        this.ingreadientPrice = ingreadientPrice;
         
     }
 
@@ -100,7 +111,7 @@ public class Ingredient{
      * Adding Extra Amount of an ingredient 
      * @param addExtraAmountofingredient
      */
-    public void addExtraIngredientAmount(int addExtraAmountofingredient){
+    public void addExtraIngredientAmount(double addExtraAmountofingredient){
         if(addExtraAmountofingredient <= 0){
             throw new IllegalArgumentException("ERR_NOT_ALLOWED_TO_ADD_EXTRA_AMOUNT_IN_NEGATIVE_OR_ZERO_VALUE");
         }
@@ -116,7 +127,7 @@ public class Ingredient{
      * Use an amount of an Ingredient to make a recipe or eat.
      * @param amountOfUsedIngredient
      */
-    public void useIngredientAmount(int amountOfUsedIngredient){
+    public void useIngredientAmount(double amountOfUsedIngredient){
         if(amountOfUsedIngredient > 0 && amountOfUsedIngredient <= this.ingredientAmount){
             this.ingredientAmount -= amountOfUsedIngredient;
 
