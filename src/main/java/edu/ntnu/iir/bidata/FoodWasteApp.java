@@ -2,6 +2,8 @@ package edu.ntnu.iir.bidata;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.text.SimpleDateFormat;
 
 
 
@@ -39,6 +41,12 @@ import java.util.ArrayList;
  *   <li>createRecipe(): Prompts the user to create a new recipe by entering details and ingredients.</li>
  *   <li>displayAllRecipes(): Displays all recipes stored in the recipe book.</li>
  * </ul>
+ * 
+ * 
+ * 
+ * 
+ * @version 22.0.2
+ * @author (Mahmoud Said Madhun Madhun)
 */
 
 public class FoodWasteApp{
@@ -48,6 +56,7 @@ public class FoodWasteApp{
     private RecipeBook recipeBook = new RecipeBook();
     private FoodWasteSystemPrints foodWasteSystemPrints = new FoodWasteSystemPrints();
     private Scanner userInput = new Scanner(System.in);
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy"); 
 
 
 
@@ -79,18 +88,26 @@ public class FoodWasteApp{
                     foodWasteStart.createIngredient();
                     break;
                 case 2:
-                    foodWasteStart.displayIngredients();
+                    foodWasteStart.checkIngredientExistensInStorage();
                     break;
                 case 3:
-                    foodWasteStart.createRecipe();
+                    foodWasteStart.displayIngredients();
+                    break;
                 case 4:
-                    foodWasteStart.displayAllRecipes();
+                    foodWasteStart.useIngredientExitstenInStorage();
                     break;
                 case 5:
-                    foodWasteStart.readyRecipesToMake();
+                    foodWasteStart.createRecipe();
+                    break;
+                case 6:
+                    foodWasteStart.displayAllRecipes();
+                    break;
+                case 7:
+                    foodWasteStart.getReadyToMakeRecipes();
                     break;
                 case 9:
-                    System.out.print("\033[H\033[2J");
+                    foodWasteStart.generateRecipesAndIngredients();
+                    break;
                 default: 
                     break;
             }
@@ -126,10 +143,11 @@ public class FoodWasteApp{
         
         
         //? Declearing Loop and Insilizing it
-        String ingredientName;
-        double ingredientAmount;
-        int ingredientMeasurement;
+        String userIngredientName;
+        double userIngredientAmount;
+        int userIngredientMeasurement;
         double userIngredientPrice;
+        String userIngredientExpireDate;
 
 
 
@@ -142,12 +160,12 @@ public class FoodWasteApp{
             boolean nameIsNotCorrect = true; //name is not correct
             //? User input has to be a valid Ingredient name
             foodWasteSystemPrints.askUserAboutIngredientName();
-            ingredientName = userInput.nextLine();
+            userIngredientName = userInput.nextLine();
             //! Name Check Loop
             while (nameIsNotCorrect == true) {
-                if ((ingredientName.isEmpty() || ingredientName.isBlank())){
+                if ((userIngredientName.isEmpty() || userIngredientName.isBlank())){
                     foodWasteSystemPrints.alertNameInvalid();
-                    ingredientName = userInput.nextLine();
+                    userIngredientName = userInput.nextLine();
                 }else{
                     nameIsNotCorrect = false;
                 }
@@ -160,12 +178,12 @@ public class FoodWasteApp{
             boolean messurementDontExist = true; //messurement is a wrong value
             //? User input has to be a valid Ingredient Measurement Type
             foodWasteSystemPrints.askUserAboutIngredientMeasurementType();
-            ingredientMeasurement = userInput.nextInt();
-            //? Measurement Check Loop
+            userIngredientMeasurement = userInput.nextInt();
+            //! Measurement Check Loop
             while (messurementDontExist == true) { 
-                if(ingredientMeasurement < 0 || 2 < ingredientMeasurement){ //! Types from 0-2 cause of array
+                if(userIngredientMeasurement < 0 || 2 < userIngredientMeasurement){ //! Types from 0-2 cause of array
                     foodWasteSystemPrints.alertMeasurmentTypeInvalid();
-                    ingredientMeasurement = userInput.nextInt();
+                    userIngredientMeasurement = userInput.nextInt();
                 }else{
                     messurementDontExist = false;
                 }
@@ -178,12 +196,12 @@ public class FoodWasteApp{
             boolean amountInvalid = true;
             //? User input has to be a valid Ingredient Amount
             foodWasteSystemPrints.askUserAbouIngredientAmout();
-            ingredientAmount = userInput.nextDouble();
+            userIngredientAmount = userInput.nextDouble();
             //! Amount Check Loop
             while (amountInvalid == true) { 
-                if(ingredientAmount <= 0){
+                if(userIngredientAmount <= 0){
                     foodWasteSystemPrints.alertAmountInvalid();
-                    ingredientAmount = userInput.nextInt();
+                    userIngredientAmount = userInput.nextInt();
                 }else{
                     amountInvalid = false;
                 }
@@ -196,7 +214,7 @@ public class FoodWasteApp{
             //? User input has to be a valid Ingredient Amount
             foodWasteSystemPrints.askUserAboutIngredientPrice();
             userIngredientPrice = userInput.nextDouble();
-            //! Amount Check Loop
+            //! Price Check Loop
             while (ingredientPriceInvalid == true) { 
                 if(userIngredientPrice <= 0){
                     foodWasteSystemPrints.alertPriceInvalid();
@@ -206,10 +224,29 @@ public class FoodWasteApp{
                 }
             }
             ingredientPriceInvalid = true;
+
+
+
+
+            //?Declearing Loop and Insilizing it
+            boolean ingredientExpireDate = true;
+            //? User input has to be a valid date for ingreadient expireDate
+            System.out.println("Write a expire date (yyyy-MM-dd):");
+            userIngredientExpireDate = userInput.next();
+            //! Amount Check Loop
+            while (ingredientExpireDate == true) { 
+                if(!dateFormat.format(userIngredientExpireDate).equals("yyyy-MM-dd")){ // ! in if statement means if i doest equal
+                    System.out.println("Wrong format (yyyy-MM-dd)");
+                    userIngredientExpireDate = userInput.nextLine();
+                }else{
+                    ingredientExpireDate = false;
+                }
+            }
+            ingredientExpireDate = true;
             
 
    
-            Ingredient Ingredient = new Ingredient(ingredientName,ingredientAmount, ingredientMeasurement, userIngredientPrice);
+            Ingredient Ingredient = new Ingredient(userIngredientName,userIngredientAmount, userIngredientMeasurement, userIngredientPrice,userIngredientExpireDate);
             foodStorage.addIngredient(Ingredient);
             
 
@@ -218,26 +255,107 @@ public class FoodWasteApp{
             char loopExit = userInput.next().charAt(0);
             userInput.nextLine(); //& runs the code so that we can add more ingredients without any skip lines
             if (loopExit == 'N' || loopExit == 'n'){
-                addIngredientForever = false;
+                addIngredientForever = false; //change value to get out of loop
             } 
         }
-        addIngredientForever = true;
+        addIngredientForever = true; //restore value so the user can use add ingredients again.
 
     }
+
 
 
 
 
 
     /**
-     * Displays all the ingredients currently stored in the food storage.
-     * This method retrieves the list of ingredients from the foodStorage object
-     * and prints each ingredient's details to the console.
-    */
+     * Displays all ingredients stored in the food storage.
+     * This method calls the displayAllIngredients() method of the foodStorage object
+     * to print out the list of all ingredients currently available.
+     */
     public void displayIngredients(){
-                foodStorage.displayAllIngredients();
+        foodStorage.displayAllIngredients();
     }
 
+
+
+
+    /**
+     * Checks if an ingredient exists in the storage and prints its details.
+     * 
+     * <p>This method verifies if the specified ingredient exists in the storage.
+     * If the ingredient exists, it prints the ingredient's details including name,
+     * price, amount, measurement type, and expiration date. If the ingredient does
+     * not exist, it prints a message indicating that the ingredient is not found.
+     * 
+     * @param nameOfIngredientTofind the name of the ingredient to find
+     */
+    public void checkIngredientExistensInStorage(){
+        boolean nameOfIngredientTofindinvalid = true;
+        if(foodStorage.checkStorageSize() == 0){
+            System.out.println("\nThe storage are empty");
+        }else{
+            System.out.println("\nWhat are the ingredient u are searching for?");
+            String nameOfIngredientTofind = userInput.nextLine();
+            while (nameOfIngredientTofindinvalid == true) {
+                if ((nameOfIngredientTofind.isEmpty() || nameOfIngredientTofind.isBlank())){
+                    foodWasteSystemPrints.alertNameInvalid();
+                    nameOfIngredientTofind = userInput.nextLine();
+                }else{
+                    nameOfIngredientTofindinvalid = false;
+                }
+            }
+            foodStorage.checkIngredientExistensInStorage(nameOfIngredientTofind);
+        }
+
+    }
+
+
+
+
+    /**
+     * Uses a specified amount of an ingredient if it exists in the storage.
+     * 
+     * <p>This method checks if the storage is empty and prompts the user for the name of the ingredient
+     * and the amount to use. It validates the input and uses the ingredient if it exists and the amount is valid.
+     * 
+     * @throws IllegalArgumentException if the amount to use is less than or equal to 0
+     * @throws IllegalArgumentException if the amount to use is greater than the amount in storage
+     */
+
+    public void useIngredientExitstenInStorage(){
+        boolean nameOfIngredientTofindInvalid = true;
+        boolean AmoutOfIngredientToUseInvalid = true;
+        if(foodStorage.checkStorageSize() == 0){
+            System.out.println("\nThe storage are empty");
+        }else{
+            System.out.println("\nWhat are the ingredient u are searching for?");
+            String nameOfIngredientTofind = userInput.nextLine();
+            while (nameOfIngredientTofindInvalid == true) {
+                if ((nameOfIngredientTofind.isEmpty() || nameOfIngredientTofind.isBlank())){
+                    foodWasteSystemPrints.alertNameInvalid();
+                    nameOfIngredientTofind = userInput.nextLine();
+                }else{
+                    nameOfIngredientTofindInvalid = false;
+                }
+            }
+
+            foodStorage.checkIngredientExistensInStorage(nameOfIngredientTofind);
+
+
+            System.out.println("\nWhat is the amount you want to use?");
+            double AmoutOfIngredientToUse = userInput.nextDouble();
+            while (AmoutOfIngredientToUseInvalid == true) {
+                if (AmoutOfIngredientToUse <= 0 || AmoutOfIngredientToUse > foodStorage.checkIngredientAmountInStorage(nameOfIngredientTofind)){
+                    foodWasteSystemPrints.alertAmountInvalid();
+                    AmoutOfIngredientToUse = userInput.nextDouble();
+                }else{
+                    AmoutOfIngredientToUseInvalid = false;
+                }
+            }
+            foodStorage.useIngredientExitstenInStorage(nameOfIngredientTofind,AmoutOfIngredientToUse);
+
+        }
+    }
 
 
 
@@ -261,11 +379,11 @@ public class FoodWasteApp{
      *
      * <p>Note: The method assumes that the user input is handled correctly and does not 
      * include validation for the input values.</p>
-     */
+    */
     public void createRecipe(){
 
 
-        System.out.println("Name of Recipe:");
+        System.out.println("\nName of Recipe:");
         String userRecipeName = userInput.nextLine();
         System.out.println("Description of recipe::");
         String recipeDescription = userInput.nextLine();
@@ -276,8 +394,7 @@ public class FoodWasteApp{
         while (addIngredientToRecipe == true) {
             
             
-            System.out.println("\n");
-            System.out.println("Name of Ingredient used in recipe:");
+            System.out.println("\nName of Ingredient used in recipe:");
             String userIngredientNamesForRecipe = userInput.nextLine();
             
             userIngredientsToMakeTheRecipe.add(userIngredientNamesForRecipe);
@@ -313,21 +430,47 @@ public class FoodWasteApp{
 
 
 
+
+
+
+
+
+
+
+
+
+
+    public void generateRecipesAndIngredients(){
+        HashMap<String, Recipe> generatedRecipes;
+    }
+
+
+
     /**
      * Displays all recipes stored in the recipe book.
      * This method delegates the task to the recipeBook's displayAllRecipes method.
-     */
+    */
     public void displayAllRecipes(){
-        recipeBook.displayAllRecipes();
+        recipeBook.displayAllRecipeInBook();
     }
 
 
 
 
 
+    
+
+    public void checkEnoughIngredientsToMakeRecipe(){
+        recipeBook.getRecipeIngredientWithAmount();
+    }
 
 
-    public void readyRecipesToMake(){
+
+    public void getReadyToMakeRecipes(){
+
+    }
+
+    public void createRecipeAuto(){
 
 
     }

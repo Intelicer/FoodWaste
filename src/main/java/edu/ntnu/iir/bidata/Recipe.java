@@ -5,6 +5,8 @@ package edu.ntnu.iir.bidata;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 /**
  * The Recipe class represents a recipe with a name, description, list of ingredients, and their corresponding amounts.
  * It provides methods to retrieve these details.
@@ -44,6 +46,10 @@ import java.util.List;
  * 
  * @see java.util.List
  * @see java.util.ArrayList
+ * 
+ * 
+ * @version 22.0.2
+ * @author (Mahmoud Said Madhun Madhun)
  */
 public class Recipe {
 
@@ -81,7 +87,7 @@ public class Recipe {
             throw new IllegalArgumentException("ERR_INGREDIENTS_AND_AMOUNTS_SIZE_MISMATCH");
         }
         this.recipeName = recipeName.substring(0,1).toUpperCase() + recipeName.substring(1, recipeName.length()).toLowerCase();
-        this.recipeDescription = recipeDescription.substring(0,1).toUpperCase() + recipeDescription.substring(1, recipeDescription.length()).toLowerCase();
+        this.recipeDescription = recipeDescription.substring(0,1).toUpperCase();
         this.recipeIngredientsToMakeTheRecipe = recipeIngredientsToMakeTheRecipe;
         this.recipeIngredientAmounts = recipeIngredientAmounts;
     }
@@ -109,7 +115,7 @@ public class Recipe {
      *
      * @return A list of ingredients required for the recipe.
      */
-    public List<String> getRecipeIngredients() {
+    public List<String> getRecipeIngredients() { //List contain String only
         return this.recipeIngredientsToMakeTheRecipe;
     }
 
@@ -118,7 +124,7 @@ public class Recipe {
      *
      * @return A list of amounts corresponding to each ingredient in the recipe.
      */
-    public List<Double> getRecipeIngredientsAmount() {
+    public List<Double> getRecipeIngredientsAmount() { //List contain Double only
         return this.recipeIngredientAmounts;
     }
 }

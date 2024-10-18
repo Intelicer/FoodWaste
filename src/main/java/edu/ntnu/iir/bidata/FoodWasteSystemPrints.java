@@ -33,7 +33,14 @@ package edu.ntnu.iir.bidata;
  * </pre>
  * 
  * @see System#println(String)
+ * 
+ * 
+ * 
+ * @version 22.0.2
+ * @author (Mahmoud Said Madhun Madhun)
  */
+
+
 public class FoodWasteSystemPrints {
 
 
@@ -51,10 +58,15 @@ public class FoodWasteSystemPrints {
     }
     public void  userReciveSelectionMenu(){
         System.out.println("\nSelection Menu:");
-        System.out.println("1. Add Ingredients to food storage");
-        System.out.println("2. Display ingredients in the food storage");
-        System.out.println("3. Create Recipe");
-        System.out.println("4. View Recipes");
+        System.out.println("1. Add Ingredients to foodstorage");
+        System.out.println("2. Search for Ingredient in foodStorage");
+        System.out.println("3. Display ingredients in the foodstorage");
+        System.out.println("4. Use ingredient from Storage");
+        System.out.println("5. Create Recipe");
+        System.out.println("6. View Recipes");
+        System.out.println("7. Check recipes that could be done foodstorage ingredients ");
+        System.out.println("88. Generate ingredients or recipes");
+        System.out.println("99. Dont Know");
         System.out.println("*: Type anything to exit.");
     }
     public void  userReciveExitAddIngredientLoop(){
@@ -126,9 +138,10 @@ public class FoodWasteSystemPrints {
     }
 
     public void alertAmountInvalid(){
-        System.out.println("\nAmount Cant be Negative or 0");
+        System.out.println("\nAmount Cant be Negative, 0, or higher that the stored amount");
         System.out.println("Check the Amount again: ");
     }
+
 
     public void alertPriceInvalid(){
         System.out.println("\nPrice Cant be Negative or 0");

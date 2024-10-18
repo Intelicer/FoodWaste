@@ -1,3 +1,7 @@
+package edu.ntnu.iir.bidata;
+
+import java.util.HashMap;
+import java.util.Iterator;
 /**
  * The RecipeBook class represents a collection of recipes.
  * It provides methods to add recipes and display all recipes in the recipe book.
@@ -16,11 +20,13 @@
  * <p>Note: This class depends on the FoodWasteSystemPrints and Recipe classes.</p>
  * 
  * @see Recipe
+ * 
+ * 
+ * 
+ * @version 22.0.2
+ * @author (Mahmoud Said Madhun Madhun)
 */
-package edu.ntnu.iir.bidata;
 
-import java.util.HashMap;
-import java.util.Iterator;
 
 
 public class RecipeBook {
@@ -60,13 +66,14 @@ public class RecipeBook {
      * 
      * The ingredients and their amounts are printed in the order they are stored in the recipe.
      */
-    public void displayAllRecipes() {
+    public void displayAllRecipeInBook() {
         this.recipeBookMap.forEach((recipeName, recipe) -> { // lambda
             System.out.println("\n");
 
 
             foodWasteSystemPrints.userDisplayRecipeBook();
             System.out.println("Description: "+recipe.getRecipeDescription());
+            System.out.println("Instructions: "+recipe.getRecipeDescription());
            
             Iterator<String> ingredientsNameIterator = recipe.getRecipeIngredients().iterator();
             Iterator<Double> ingredientsAmountIterator = recipe.getRecipeIngredientsAmount().iterator();
@@ -77,4 +84,22 @@ public class RecipeBook {
             }
         });
     }
+
+
+    public void getRecipeIngredientWithAmount(){
+        this.recipeBookMap.forEach((recipeName, recipe) -> { // lambda
+            System.out.println("\n");
+            Iterator<String> ingredientsNameIterator = recipe.getRecipeIngredients().iterator();
+            Iterator<Double> ingredientsAmountIterator = recipe.getRecipeIngredientsAmount().iterator();
+
+            System.out.println("Ingreadients:");
+            while (ingredientsNameIterator.hasNext()) {
+                System.out.println(ingredientsNameIterator.next() +" : " +ingredientsAmountIterator.next());
+            }
+        });
+    }
+
+
+
+
 }
