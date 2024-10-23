@@ -8,20 +8,14 @@ STUDENT NAME = "Mahmoud Madhun"
 STUDENT ID = "139563"
 
 ## Project description
-
-[//]: # (TODO: Write a short description of your project/product here.)
 Foodwaste is a project that contain some classes like, foodStorage as a container of objects from class ingredient that will be used to make food recepies later.
 
 ## Project structure
-
-[//]: # (TODO: Describe the structure of your project here. How have you used packages in your structure. Where are all sourcefiles stored. Where are all JUnit-test classes stored. etc.)
-Struccture: Maven
-Source-Files: src/main/java/edu/ntnu/iir/bidata
-Test-Files: src/test
+Structure: Maven <br>
+Source-Files: src/main/java/edu/ntnu/iir/bidata <br>
+Test-Files: src/test 
 
 ## Link to repository
-
-[//]: # (TODO: Include a link to your GitHub repository here.)
 https://github.com/NTNU-IE-IIR/mappe-idata1003-2024-foodwaste-ERR-RES0LVED
 
 ## How to run the project
