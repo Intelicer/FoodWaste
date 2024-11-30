@@ -8,14 +8,20 @@ STUDENT NAME = "Mahmoud Madhun"
 STUDENT ID = "139563"
 
 ## Project description
+
+[//]: # (TODO: Write a short description of your project/product here.)
 Foodwaste is a project that contain some classes like, foodStorage as a container of objects from class ingredient that will be used to make food recepies later.
 
 ## Project structure
-Structure: Maven <br>
-Source-Files: src/main/java/edu/ntnu/iir/bidata <br>
-Test-Files: src/test 
+
+[//]: # (TODO: Describe the structure of your project here. How have you used packages in your structure. Where are all sourcefiles stored. Where are all JUnit-test classes stored. etc.)
+Struccture: Maven
+Source-Files: src/main/java/edu/ntnu/iir/bidata
+Test-Files: src/test
 
 ## Link to repository
+
+[//]: # (TODO: Include a link to your GitHub repository here.)
 https://github.com/NTNU-IE-IIR/mappe-idata1003-2024-foodwaste-ERR-RES0LVED
 
 ## How to run the project
@@ -31,13 +37,11 @@ The code runs from the Main.java
 [//]: # (TODO: Describe how to run the tests here.)
 
 ## References
-
 [//]: # (TODO: Include references here, if any. For example, if you have used code from the course book, include a reference to the chapter.
 Or if you have used code from a website or other source, include a link to the source.)
-
-### Refrences:
-<ul>
-    <li>https://www.baeldung.com/java-console-ascii-make-table</li>
-    <li>https://www.w3schools.com/java/java_arrays.asp</li>
-    <li>https://www.geeksforgeeks.org/</li>
-</ul>
+- Baeldung: [Java Console ASCII Make Table](https://www.baeldung.com/java-console-ascii-make-table)
+- W3Schools: [Java Arrays](https://www.w3schools.com/java/java_arrays.asp)
+- GeeksforGeeks: [GeeksforGeeks](https://www.geeksforgeeks.org/)
+- Markdown Guide: [Basic Syntax](https://www.markdownguide.org/basic-syntax/)
+- Maven: [Maven Documentation](https://maven.apache.org/guides/index.html)
+- JUnit: [JUnit 5 User Guide](https://junit.org/junit5/docs/current/user-guide/)
