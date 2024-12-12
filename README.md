@@ -2,19 +2,14 @@
 # Portfolio project IDATA1003
 This file uses Mark Down syntax. For more information see [here](https://www.markdownguide.org/basic-syntax/).
 
-[//]: # (TODO: Fill inn your name and student ID)
-
 STUDENT NAME = "Mahmoud Madhun"  
 STUDENT ID = "139563"
 
 ## Project description
 
-[//]: # (TODO: Write a short description of your project/product here.)
-Foodwaste is a project that contain some classes like, foodStorage as a container of objects from class ingredient that will be used to make food recepies later.
+This project serves as the end assignment for course IDATA1003. The project involves developing a text-based application to help users manage food items in their households and reduce food waste. It allows users to add items to a FoodStorage with details like quantity, expiration date, and price. Users can track their inventory, search for items, and check for expired goods, including their total value. Additionally, the application will support recipe creation and meal suggestions based on available ingredients. The project uses Maven for organization and dependency management, along with Git for version control. The following limitations have been set on the program: The system only supports one place for storage the food items, which is the foodstorage in this application. The RecipeBook in the program has pre-written recipes, and gives the user chance to add more. The foodstorage comes with some pre-put items (samples).
 
 ## Project structure
-
-[//]: # (TODO: Describe the structure of your project here. How have you used packages in your structure. Where are all sourcefiles stored. Where are all JUnit-test classes stored. etc.)
 Struccture: Maven
 Source-Files: src/main/java/edu/ntnu/iir/bidata
 Test-Files: src/test
@@ -26,15 +21,12 @@ https://github.com/NTNU-IE-IIR/mappe-idata1003-2024-foodwaste-ERR-RES0LVED
 
 ## How to run the project
 
-[//]: # (TODO: Describe how to run your project here. What is the main class? What is the main method?
-What is the input and output of the program? What is the expected behaviour of the program?)
+The code runs from the FoodWasteApp.java
 
-The code runs from the Main.java
-### More Coming Soon
+
 
 ## How to run the tests
-
-[//]: # (TODO: Describe how to run the tests here.)
+Open the test class you want to run in the folder src/test/java There will be 4 classes. Select the class you want to run the test for and click run.
 
 ## References
 [//]: # (TODO: Include references here, if any. For example, if you have used code from the course book, include a reference to the chapter.
