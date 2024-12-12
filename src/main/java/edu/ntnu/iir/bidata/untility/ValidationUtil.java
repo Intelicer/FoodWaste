@@ -5,7 +5,48 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 /**
- * Utility class for validating user inputs.
+ * The ValidationUtil class provides utility methods for validating user input.
+ * It includes methods to validate string input, integer input, double input, 
+ * date input, and single character input. These methods ensure that the user 
+ * input meets specific criteria and prompts the user to re-enter the input 
+ * if it is invalid.
+ * 
+ * <p>Methods included in this class:
+ * <ul>
+ *   <li>{@link #isVaildStringInput(Scanner, String)}: Validates a string input.
+ *   <li>{@link #isVaildMesurmentInput(Scanner)}: Validates an integer measurement input.
+ *   <li>{@link #isVaildDoubleInput(Scanner, String)}: Validates a double input.
+ *   <li>{@link #isVaildIntInput(Scanner, String)}: Validates an integer input.
+ *   <li>{@link #isValidDateInput(Scanner, String)}: Validates a date input.
+ *   <li>{@link #isValidCharInput(Scanner, String)}: Validates a single character input.
+ * </ul>
+ * 
+ * <p>Each method reads user input from the console using a Scanner object and 
+ * ensures that the input meets the required criteria. If the input is invalid, 
+ * the user is prompted to re-enter the input until a valid input is provided.
+ * 
+ * <p>Example usage:
+ * <pre>
+ * {@code
+ * Scanner scanner = new Scanner(System.in);
+ * String ingredientName = ValidationUtil.isVaildStringInput(scanner, "Ingredient Name");
+ * int measurement = ValidationUtil.isVaildMesurmentInput(scanner);
+ * double quantity = ValidationUtil.isVaildDoubleInput(scanner, "Quantity");
+ * int someInt = ValidationUtil.isVaildIntInput(scanner, "Some Integer");
+ * String date = ValidationUtil.isValidDateInput(scanner, "Date");
+ * char singleChar = ValidationUtil.isValidCharInput(scanner, "Single Character");
+ * }
+ * </pre>
+ * 
+ * <p>Note: The methods in this class assume that the Scanner object is properly 
+ * initialized and passed to the methods.
+ * 
+ * @see java.util.Scanner
+ * @see java.time.LocalDate
+ * @see java.time.format.DateTimeFormatter
+ * 
+ * @version 22.0.2
+ * @author (Mahmoud Said Madhun Madhun)
  */
 public class ValidationUtil {
     
@@ -20,6 +61,9 @@ public class ValidationUtil {
   */
   public static String isVaildStringInput(Scanner userInput, String validationTarget) {
     String stringInput = userInput.nextLine();
+    stringInput = stringInput.replaceAll("\\s+", " ").trim();
+    stringInput = stringInput.substring(0, 1).toUpperCase() 
+                                      + stringInput.substring(1).toLowerCase();
     boolean inCorrectString = true; // name is not correct
     while (inCorrectString == true) {
       if ((stringInput.isBlank())) {
@@ -121,9 +165,15 @@ public class ValidationUtil {
         numberIsntIntegar = false;
       } catch (NumberFormatException e) {
         if (hopeItsRight instanceof String) {
-          System.out.println("\nInvalid entered text for: ( "
+          System.out.println("\nInvalid entered integar for: ( "
               + validationTarget 
-              + " )");
+              + " )"
+              + "\nWrite a valid integar show from the menu");
+        } else {
+          System.out.println("\nInvalid entered integar for: ("
+              + validationTarget 
+              + ")"
+              + "\nWrite a valid integar show from the menu");
         }
       }
     }
@@ -176,13 +226,14 @@ public class ValidationUtil {
     char charInput = '0';
     while (isValid == false) {
       textInput = userInput.nextLine();
+      textInput = textInput.replaceAll("\\s+", "").trim();
       if (textInput.length() == 1) {
         charInput = textInput.charAt(0);
         isValid = true;
       } else {
         System.out.println("\nInvalid input for " 
                           + validationTarget 
-                          + ". Please enter a single character:");
+                          + ".\nPlease enter a single character:");
       }
     }
     return charInput;

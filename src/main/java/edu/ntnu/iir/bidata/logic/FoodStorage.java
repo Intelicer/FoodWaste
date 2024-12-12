@@ -1,111 +1,142 @@
-
 package edu.ntnu.iir.bidata.logic;
 
 import edu.ntnu.iir.bidata.entity.Ingredient;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 
 /**
- * The FoodStorage class represents a storage system for ingredients.
- * It provides methods to add, display, search, and use ingredients in the storage.
- * The ingredients are stored in a HashMap with their names as keys.
+ * The FoodStorage class represents a storage for ingredients.
+ * It provides methods to add, retrieve, remove, and iterate over ingredients.
+ * The storage is backed by a map where the keys are 
+ * ingredient names and the values are Ingredient objects.
  * 
- * <p>Features:
- * <ul>
- *   <li>Add ingredients to the storage</li>
- *   <li>Display all ingredients in a tabular format</li>
- *   <li>Search for an ingredient by name</li>
- *   <li>Use a specified amount of an ingredient</li>
- *   <li>Check the size of the storage</li>
- *   <li>Check the amount of a specific ingredient</li>
- *   <li>Check if a given ingredient is present in the storage</li>
- * </ul>
+ * <p>This class ensures that ingredients are validated 
+ * before being added or retrieved from the storage.
+ * It also provides an unmodifiable view of the ingredients in the storage.</p>
+ * 
+ * <p>Usage example:</p>
+ * <pre>{@code
+ * Map<String, Ingredient> initialStorage = new HashMap<>();
+ * FoodStorage foodStorage = new FoodStorage(initialStorage);
+ * 
+ * Ingredient ingredient = new Ingredient("Tomato");
+ * foodStorage.addIngredient(ingredient);
+ * 
+ * Ingredient retrievedIngredient = foodStorage.getIngredient("Tomato");
+ * 
+ * Iterator<Ingredient> iterator = foodStorage.getIterator();
+ * while (iterator.hasNext()) {
+ *     System.out.println(iterator.next().getIngredientName());
+ * }
+ * 
+ * Map<String, Ingredient> ingredients = foodStorage.getIngredients();
+ * 
+ * Ingredient removedIngredient = foodStorage.removeIngredient("Tomato");
+ * }</pre>
+ * 
+ * 
+ * @version 22.0.2
+ * @author (Mahmoud Said Madhun Madhun)
  */
+
+
 public class FoodStorage {
 
-  // Creating HashMap for Ingredients
-  private HashMap<String, Ingredient> foodStorage = new HashMap<>(); 
 
+  private final Map<String, Ingredient> foodStorage;
 
-  
-
-  // Constructor to inject the HashMap dependency
-  public FoodStorage() {
-    this.foodStorage =  new HashMap<>();
+  /**
+   * Constructs a new FoodStorage with the specified initial storage.
+   *
+   * @param foodStorage the initial storage of ingredients
+   */
+  public FoodStorage(Map<String, Ingredient> foodStorage) {
+    this.foodStorage = foodStorage;
   }
 
   /**
    * Adds an ingredient to the storage.
    *
-   * @param ingredient the ingredient to be added to the storage
+   * @param ingredient the ingredient to be added
+   * @throws IllegalArgumentException if the ingredient is invalid
    */
   public void addIngredient(Ingredient ingredient) {
-    if (ingredient == null || !ingredient.isValid()) {
-      throw new IllegalArgumentException("Invalid ingredient");
+    validateIngredient(ingredient);
+    if (!this.foodStorage.containsKey(ingredient.getIngredientName())) {
+      this.foodStorage.put(ingredient.getIngredientName(), ingredient);
     }
-    String ingredientName = ingredient.getIngredientName();
-    this.foodStorage.put(ingredientName, ingredient);  
+  }
+
+  /**
+   * Retrieves an ingredient from the storage by its name.
+   *
+   * @param ingredientName the name of the ingredient to retrieve
+   * @return the ingredient with the specified name, or null if not found
+   * @throws IllegalArgumentException if the ingredient name is blank, empty, or null
+   */
+  public Ingredient getIngredient(String ingredientName) {
+    validateIngredientName(ingredientName);
+    if (this.foodStorage.containsKey(ingredientName)) {
+      return this.foodStorage.get(ingredientName);
+    }
+    return null;
   }
 
 
-
-
-
   /**
-   * Returns an iterator over the ingredients in the food storage.
+   * Returns an iterator over the ingredients in the storage.
    *
-   * @return an {@code Iterator<Ingredient>} over the ingredients in the food storage.
+   * @return an iterator over the ingredients
    */
   public Iterator<Ingredient> getIterator() {
     return this.foodStorage.values().iterator();
   }
 
-
-
-  public Map<String, Ingredient> getIngredients() {
-    return this.foodStorage;
-  }
-
-
-  
-
   /**
-   * Checks the size of the storage.
+   * Returns an unmodifiable view of the ingredients in the storage.
    *
-   * @return the number of ingredients in the storage
+   * @return an unmodifiable map of the ingredients
    */
-  public int getFoodStorageSize() {
-    return this.foodStorage.size();
+  public Map<String, Ingredient> getIngredients() {
+    return Collections.unmodifiableMap(this.foodStorage);
   }
 
-  
   /**
-   * Retrieves an ingredient from the food storage by its name.
+   * Removes an ingredient from the storage by its name.
    *
-   * @param ingredientName the name of the ingredient to retrieve
-   * @return the Ingredient object associated with the given name, 
-   *          or null if no such ingredient exists
-  */
-  public Ingredient getIngredient(String ingredientName) {
-    if (ingredientName == null || ingredientName.isBlank()) {
-      throw new IllegalArgumentException("Invalid ingredient name input, cant be blank");
-    }
-    return this.foodStorage.get(ingredientName);
-  }
-  
-
-
-
-
-
-  public void removeIngredient(String ingredientName) {
-    if (ingredientName == null || ingredientName.isBlank()) {
-        throw new IllegalArgumentException("Invalid ingredient name input, cannot be null or blank");
-    }
-    this.foodStorage.remove(ingredientName);
+   * @param ingredientName the name of the ingredient to remove
+   * @return the removed ingredient, or null if not found
+   * @throws IllegalArgumentException if the ingredient name is blank, empty, or null
+   */
+  public Ingredient removeIngredient(String ingredientName) {
+    validateIngredientName(ingredientName);
+    return this.foodStorage.remove(ingredientName);
   }
 
+  /**
+   * Validates the specified ingredient.
+   *
+   * @param ingredient the ingredient to validate
+   * @throws IllegalArgumentException if the ingredient is null or invalid
+   */
+  private void validateIngredient(Ingredient ingredient) {
+    if (ingredient == null) {
+      throw new IllegalArgumentException("Invalid ingredient cant be added");
+    }
+  }
+
+  /**
+   * Validates the specified ingredient name.
+   *
+   * @param ingredientName the ingredient name to validate
+   * @throws IllegalArgumentException if the ingredient name is blank, empty, or null
+   */
+  private void validateIngredientName(String ingredientName) {
+    if (ingredientName == null || ingredientName.isBlank()) {
+      throw new IllegalArgumentException("Ingredient name can't be blank, empty or null");
+    }
+  }
 
   
 }
