@@ -16,8 +16,7 @@ Test-Files: src/test
 
 ## Link to repository
 
-[//]: # (TODO: Include a link to your GitHub repository here.)
-https://github.com/NTNU-IE-IIR/mappe-idata1003-2024-foodwaste-ERR-RES0LVED
+gihttps://github.com/NTNU-IE-IIR/mappe-idata1003-2024-foodwaste-ERR-RES0LVED
 
 ## How to run the project
 
