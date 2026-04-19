@@ -3,7 +3,6 @@
 This file uses Mark Down syntax. For more information see [here](https://www.markdownguide.org/basic-syntax/).
 
 STUDENT NAME = "Mahmoud Madhun"  
-STUDENT ID = "139563"
 
 ## Project description
 
@@ -16,7 +15,7 @@ Test-Files: src/test
 
 ## Link to repository
 
-gihttps://github.com/NTNU-IE-IIR/mappe-idata1003-2024-foodwaste-ERR-RES0LVED
+https://github.com/NTNU-IE-IIR/mappe-idata1003-2024-foodwaste-ERR-RES0LVED
 
 ## How to run the project
 
