@@ -1,24 +1,123 @@
-## Project description
+# FoodWaste
 
-This project serves as the end assignment for course IDATA1003. The project involves developing a text-based application to help users manage food items in their households and reduce food waste. It allows users to add items to a FoodStorage with details like quantity, expiration date, and price. Users can track their inventory, search for items, and check for expired goods, including their total value. Additionally, the application will support recipe creation and meal suggestions based on available ingredients. The project uses Maven for organization and dependency management, along with Git for version control. The following limitations have been set on the program: The system only supports one place for storage the food items, which is the foodstorage in this application. The RecipeBook in the program has pre-written recipes, and gives the user chance to add more. The foodstorage comes with some pre-put items (samples).
+FoodWaste is a Java console application for managing household ingredients and reducing food waste.
+The application lets users track what they have in storage, maintain a recipe book, and discover what can be cooked from available ingredients.
 
-## Project structure
-Struccture: Maven
-Source-Files: src/main/java/edu/ntnu/iir/bidata
-Test-Files: src/test
+This project is structured as a Maven project and includes unit tests using JUnit 5.
 
-## How to run the project
+## Features
 
-The code runs from the FoodWasteApp.java
+- Add ingredients to food storage with amount, measurement, price, and expiration date.
+- Search and inspect ingredients in storage.
+- Update ingredient amounts (use more or add more) and remove ingredients.
+- List all ingredients in a table-style console view.
+- Remove expired ingredients and inspect total storage value.
+- Add recipes with description, instructions, servings, and required ingredients.
+- Search recipes and check whether they are cookable with current storage.
+- Suggest recipes that can be made from available ingredients.
 
+## Tech Stack
 
+- Java 21
+- Maven
+- JUnit Jupiter 5.10.2
 
-## How to run the tests
-Open the test class you want to run in the folder src/test/java There will be 4 classes. Select the class you want to run the test for and click run.
+## Project Structure
+
+```text
+FoodWaste/
+	pom.xml
+	README.md
+	src/
+		main/java/edu/ntnu/iir/bidata/
+			FoodWasteApp.java
+			entity/
+				Ingredient.java
+				Recipe.java
+			logic/
+				FoodStorage.java
+				RecipeBook.java
+			ui/
+				UserInterface.java
+			untility/
+				ValidationUtil.java
+		test/java/
+			FoodStorageTest.java
+			IngredientTest.java
+			RecipeBookTest.java
+			RecipeTest.java
+```
+
+## Requirements
+
+- JDK 21 installed and available on PATH
+- Maven 3.9+ installed and available on PATH
+
+Check your versions:
+
+```bash
+java -version
+mvn -version
+```
+
+## Build the Project
+
+From the project root:
+
+```bash
+mvn clean compile
+```
+
+## Run the Application
+
+The entry point is `edu.ntnu.iir.bidata.FoodWasteApp`.
+
+1. Compile classes:
+
+```bash
+mvn clean compile
+```
+
+2. Run the app:
+
+```bash
+java -cp target/classes edu.ntnu.iir.bidata.FoodWasteApp
+```
+
+You can also run `FoodWasteApp.java` directly from your IDE.
+
+## Run Tests
+
+Run all tests:
+
+```bash
+mvn test
+```
+
+Run a single test class:
+
+```bash
+mvn -Dtest=FoodStorageTest test
+```
+
+## Core Components
+
+- `FoodWasteApp`: main entry point.
+- `UserInterface`: command-line menus and user interaction flow.
+- `FoodStorage`: manages ingredient storage operations.
+- `RecipeBook`: manages recipe storage operations.
+- `Ingredient` and `Recipe`: domain entities.
+- `ValidationUtil`: input validation utilities for console input.
+
+## Known Limitations
+
+- The application uses one local in-memory storage for ingredients.
+- Data is not persisted between runs.
+- The application is text-based (console UI only).
+- Some sample/default data may be generated through the UI flow.
 
 ## References
-[//]: # (TODO: Include references here, if any. For example, if you have used code from the course book, include a reference to the chapter.
-Or if you have used code from a website or other source, include a link to the source.)
+
 - Baeldung: [Java Console ASCII Make Table](https://www.baeldung.com/java-console-ascii-make-table)
 - W3Schools: [Java Arrays](https://www.w3schools.com/java/java_arrays.asp)
 - GeeksforGeeks: [GeeksforGeeks](https://www.geeksforgeeks.org/)
