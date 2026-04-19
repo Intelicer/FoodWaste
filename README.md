@@ -1,6 +1,3 @@
-
-STUDENT NAME = "Mahmoud Madhun"  
-
 ## Project description
 
 This project serves as the end assignment for course IDATA1003. The project involves developing a text-based application to help users manage food items in their households and reduce food waste. It allows users to add items to a FoodStorage with details like quantity, expiration date, and price. Users can track their inventory, search for items, and check for expired goods, including their total value. Additionally, the application will support recipe creation and meal suggestions based on available ingredients. The project uses Maven for organization and dependency management, along with Git for version control. The following limitations have been set on the program: The system only supports one place for storage the food items, which is the foodstorage in this application. The RecipeBook in the program has pre-written recipes, and gives the user chance to add more. The foodstorage comes with some pre-put items (samples).
