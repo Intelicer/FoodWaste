@@ -7,10 +7,6 @@ Struccture: Maven
 Source-Files: src/main/java/edu/ntnu/iir/bidata
 Test-Files: src/test
 
-## Link to repository
-
-https://github.com/NTNU-IE-IIR/mappe-idata1003-2024-foodwaste-ERR-RES0LVED
-
 ## How to run the project
 
 The code runs from the FoodWasteApp.java
