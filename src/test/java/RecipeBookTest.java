@@ -1,8 +1,9 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.ntnu.iir.bidata.entity.Ingredient;
 import edu.ntnu.iir.bidata.entity.Recipe;
@@ -10,8 +11,6 @@ import edu.ntnu.iir.bidata.logic.RecipeBook;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 /** Unit tests for the RecipeBook class. */
 class RecipeBookTest {
@@ -61,8 +60,10 @@ class RecipeBookTest {
         0,
         recipeBook.getRecipeBookSize(),
         "RecipeBook size should decrease after removing a recipe.");
-    assertNull(
-        recipeBook.getRecipe("Pasta"), "Removed recipe should no longer exist in the RecipeBook.");
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> recipeBook.getRecipe("Pasta"),
+        "Removed recipe should no longer exist in the RecipeBook.");
   }
 
   /** Tests fetching a recipe from the RecipeBook. */
@@ -96,24 +97,16 @@ class RecipeBookTest {
   /** Tests that fetching a non-existent recipe throws an IllegalArgumentException. */
   @Test
   void testGetNonExistentRecipeThrowsException() {
-    IllegalArgumentException thrown =
-        assertThrows(
-            IllegalArgumentException.class,
-            () -> {
-              recipeBook.getRecipe("NonExistent");
-            });
-    System.out.println("Caught IllegalArgumentException: " + thrown.getMessage());
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> recipeBook.getRecipe("raw"));
   }
 
   /** Tests that removing a non-existent recipe throws an IllegalArgumentException. */
   @Test
   void testRemoveNonExistentRecipeThrowsException() {
-    IllegalArgumentException thrown =
-        assertThrows(
-            IllegalArgumentException.class,
-            () -> {
-              recipeBook.removeRecipe("NonExistent");
-            });
-    System.out.println("Caught IllegalArgumentException: " + thrown.getMessage());
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> recipeBook.removeRecipe("NonExistent"));
   }
 }

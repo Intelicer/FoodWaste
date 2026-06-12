@@ -81,9 +81,10 @@ public class RecipeBook {
    */
   public void removeRecipe(String recipeName) {
     validateRecipeName(recipeName);
-    if (recipeBook.containsKey(recipeName)) {
-      recipeBook.remove(recipeName);
+    if (!recipeBook.containsKey(recipeName)) {
+      throw new IllegalArgumentException("Recipe not found: " + recipeName);
     }
+    recipeBook.remove(recipeName);
   }
 
   /**
@@ -94,10 +95,10 @@ public class RecipeBook {
   */
   public Recipe getRecipe(String recipeName) {
     validateRecipeName(recipeName);
-    if (recipeBook.containsKey(recipeName)) {
-      return recipeBook.get(recipeName);
+    if (!recipeBook.containsKey(recipeName)) {
+      throw new IllegalArgumentException("Recipe not found: " + recipeName);
     }
-    return null;
+    return recipeBook.get(recipeName);
   }
 
 
